@@ -5,7 +5,7 @@ import { Rss, Sun, Moon } from 'react-feather';
 import Cookie from 'js-cookie';
 import Logo from '@/components/Logo';
 import VisuallyHidden from '@/components/VisuallyHidden';
-
+import Link from 'next/link'
 import styles from './Header.module.css';
 
 function Header({ initialTheme, className, ...delegated }) {
@@ -35,7 +35,7 @@ function Header({ initialTheme, className, ...delegated }) {
       <Logo />
 
       <div className={styles.actions}>
-        <button className={styles.action}>
+        <Link href="/rss.xml" className={styles.action}>
           <Rss
             size="1.5rem"
             style={{
@@ -46,7 +46,7 @@ function Header({ initialTheme, className, ...delegated }) {
           <VisuallyHidden>
             View RSS feed
           </VisuallyHidden>
-        </button>
+        </Link>
         <button onClick={handleThemeChange} className={styles.action}>
           {theme === 'light' ? <Sun size="1.5rem" /> : <Moon size="1.5rem" />}
           
