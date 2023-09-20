@@ -9,9 +9,14 @@ export const HeadingsContext = React.createContext();
 
 function BlogBody({ initialHeadings, children }) {
   const [headings, setHeadings] = React.useState(initialHeadings);
-  const value = { headings, setHeadings };
+
+  const memoizedContextValue = React.useMemo(() => ({
+    headings,
+    setHeadings,
+  }), [headings]);
+  
   return (
-    <HeadingsContext.Provider value={value}>
+    <HeadingsContext.Provider value={memoizedContextValue}>
       <div className={styles.page}>
         <aside className={styles.toc}>
           <TOC headings={headings} />
@@ -23,3 +28,18 @@ function BlogBody({ initialHeadings, children }) {
 }
 
 export default BlogBody;
+
+// const HeadingsProvider = ({ initialHeadings, children }) => {
+//   const [headings, setHeadings] = React.useState(initialHeadings);
+
+//   const memoizedContextValue = useMemo(() => ({
+//     headings,
+//     setHeadings,
+//   }), [headings]);
+
+//   return (
+//     <HeadingsContext.Provider value={memoizedContextValue}>
+//       {children}
+//     </HeadingsContext.Provider>
+//   );
+// };
