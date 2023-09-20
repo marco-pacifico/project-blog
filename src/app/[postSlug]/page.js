@@ -1,10 +1,11 @@
 import BlogHero from "@/components/BlogHero";
-import TOC from "@/components/TOC";
+import BlogBody from "@/components/BlogBody";
 import { BLOG_TITLE } from "@/constants";
 import { loadBlogPost, getHeadings } from "@/helpers/file-helpers";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import styles from "./postSlug.module.css";
+import { MDXRemote } from "next-mdx-remote/rsc";
 import MDXComponents from "@/helpers/mdx-components";
+
 
 export async function generateMetadata({ params }) {
   const { frontmatter } = await loadBlogPost(params.postSlug);
@@ -26,10 +27,10 @@ async function BlogPost({ params }) {
         title={frontmatter.title}
         publishedOn={frontmatter.publishedOn}
       />
-      <div className={styles.page}>
-        <TOC headings={headings} />
+      <BlogBody headings={headings}>
         <MDXRemote source={content} components={MDXComponents} />
-      </div>
+      </BlogBody>
+     
     </article>
   );
 }
