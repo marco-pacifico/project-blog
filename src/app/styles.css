@@ -43,6 +43,7 @@ h6 {
 
 /* THEME VARIABLES */
 html {
+  scroll-behavior: smooth;
   --content-width: 55rem;
   --outer-content-width: 80rem;
   --viewport-padding: 16px;

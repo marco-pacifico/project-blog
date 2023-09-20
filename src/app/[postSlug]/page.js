@@ -1,9 +1,10 @@
-import BlogHero from '@/components/BlogHero';
-import { BLOG_TITLE } from '@/constants';
-import { loadBlogPost } from '@/helpers/file-helpers';
-import { MDXRemote } from 'next-mdx-remote/rsc';
-import styles from './postSlug.module.css';
-import MDXComponents from '@/helpers/mdx-components';
+import BlogHero from "@/components/BlogHero";
+import TOC from "@/components/TOC";
+import { BLOG_TITLE } from "@/constants";
+import { loadBlogPost, getHeadings } from "@/helpers/file-helpers";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import styles from "./postSlug.module.css";
+import MDXComponents from "@/helpers/mdx-components";
 
 export async function generateMetadata({ params }) {
   const { frontmatter } = await loadBlogPost(params.postSlug);
@@ -11,13 +12,13 @@ export async function generateMetadata({ params }) {
   return {
     title: `${frontmatter.title} | ${BLOG_TITLE}}`,
     description: frontmatter.abstract,
-  }
-};
-
+  };
+}
 
 async function BlogPost({ params }) {
+  const { frontmatter, content } = await loadBlogPost(params.postSlug);
 
-  const {frontmatter, content} = await loadBlogPost(params.postSlug);
+  const headings = await getHeadings(content);
 
   return (
     <article className={styles.wrapper}>
@@ -26,6 +27,7 @@ async function BlogPost({ params }) {
         publishedOn={frontmatter.publishedOn}
       />
       <div className={styles.page}>
+        <TOC headings={headings} />
         <MDXRemote source={content} components={MDXComponents} />
       </div>
     </article>
