@@ -43,10 +43,9 @@ export async function getHeadings(content) {
     const level = match[1].length; // Calculate heading level based on the number of '#' characters
     const text = match[2]; // Extract the heading text
     const id = text.toLowerCase().replace(/\s+/g, "-"); // Generate a slug from the heading text
-    headings.push({ level, text, id });
+    const isOnScreen = false;
+    headings.push({ level, text, id, isOnScreen });
   }
-
-  console.log(headings);
 
   return headings;
 }

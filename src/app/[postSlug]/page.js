@@ -19,7 +19,7 @@ export async function generateMetadata({ params }) {
 async function BlogPost({ params }) {
   const { frontmatter, content } = await loadBlogPost(params.postSlug);
 
-  const headings = await getHeadings(content);
+  const initialHeadings = await getHeadings(content);
 
   return (
     <article className={styles.wrapper}>
@@ -27,7 +27,7 @@ async function BlogPost({ params }) {
         title={frontmatter.title}
         publishedOn={frontmatter.publishedOn}
       />
-      <BlogBody headings={headings}>
+      <BlogBody initialHeadings={initialHeadings}>
         <MDXRemote source={content} components={MDXComponents} />
       </BlogBody>
      
