@@ -6,7 +6,6 @@ import styles from "./blogBody.module.css";
 // Create a new context for the headings
 export const HeadingsContext = React.createContext();
 
-
 function BlogBody({ initialHeadings, children }) {
   const [headings, setHeadings] = React.useState(initialHeadings);
 
@@ -14,7 +13,7 @@ function BlogBody({ initialHeadings, children }) {
     headings,
     setHeadings,
   }), [headings]);
-  
+
   return (
     <HeadingsContext.Provider value={memoizedContextValue}>
       <div className={styles.page}>
