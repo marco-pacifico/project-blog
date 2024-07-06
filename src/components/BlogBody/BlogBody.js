@@ -27,18 +27,3 @@ function BlogBody({ initialHeadings, children }) {
 }
 
 export default BlogBody;
-
-// const HeadingsProvider = ({ initialHeadings, children }) => {
-//   const [headings, setHeadings] = React.useState(initialHeadings);
-
-//   const memoizedContextValue = useMemo(() => ({
-//     headings,
-//     setHeadings,
-//   }), [headings]);
-
-//   return (
-//     <HeadingsContext.Provider value={memoizedContextValue}>
-//       {children}
-//     </HeadingsContext.Provider>
-//   );
-// };

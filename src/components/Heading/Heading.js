@@ -4,11 +4,8 @@ import useIsOnScreen from "../../hooks/is-on-screen";
 import { HeadingsContext } from "@/components/BlogBody";
 
 export const H2 = React.memo(function H2({ children }) {
-  const id = React.useId();
 
   const { setHeadings } = React.useContext(HeadingsContext);
-
-  console.log(`rending H2 ${id}`);
 
   // For intersection observer
   const [headingRef, isOnScreen] = useIsOnScreen({
@@ -20,7 +17,6 @@ export const H2 = React.memo(function H2({ children }) {
   const headingId = children.toLowerCase().replace(/\s/g, "-");
 
   React.useEffect(() => {
-    console.log(`H2 ${headingId} is on screen`);
     if (isOnScreen) {
       setHeadings((prevHeadings) => {
         // Copy the headings array
@@ -39,7 +35,7 @@ export const H2 = React.memo(function H2({ children }) {
     } 
 
     if (!isOnScreen) {
-      console.log(`H2 ${headingId} is off screen`)
+
       setHeadings((prevHeadings) => {
         // Get the index of the current heading in the headings array
         const currentHeadingIndex = prevHeadings.findIndex(
